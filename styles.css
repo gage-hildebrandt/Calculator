@@ -1,0 +1,24 @@
+body {
+    background-color: black;
+}
+
+.buttons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    margin-top: 200px;
+    background-color:slategray;
+    padding: 50px;
+}
+
+.calc-header {
+    display: flex;
+    background-color:dimgray;
+    justify-content: center;
+
+}
+
+.calc-window {
+    
+}

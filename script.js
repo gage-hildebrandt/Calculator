@@ -17,3 +17,13 @@ const divide = (a, b) => {
     result = a / b;
     console.log(result);
 }
+
+let firstNumber = null;
+
+let operator = null;
+
+let secondNumber = null;
+
+const operate = (a, b) => {
+    
+}
