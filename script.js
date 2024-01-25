@@ -24,6 +24,17 @@ let operator = null;
 
 let secondNumber = null;
 
-const operate = (a, b) => {
-    
+const operate = (a, operator, b) => {
+    switch (operator) {
+        case '+':
+            return add(a, b);
+        case '-':
+            return subtract(a, b);
+        case '*':
+            return multiply(a, b);
+        case '/':
+            return divide(a, b);
+        default:
+            return 'Invalid operator ';
+    }
 }
