@@ -1,40 +1,77 @@
-const add = (a, b) => {
-    result = a + b;
-    console.log(result);
-}
+let previousValue = '';
+let operator = '';
+let currentValue = '';
 
-const subtract = (a, b) => {
-    result = a - b;
-    console.log(result);
-}
+document.addEventListener('DOMContentLoaded', function() {
+    let clear = document.querySelector('#clear-btn');
+    let equals = document.querySelector('.equals');
+    let decimal = document.querySelector('.decimal');
 
-const multiply = (a, b) => {
-    result = a * b;
-    console.log(result);
-}
+    let number = document.querySelectorAll('.number');
+    let operators = document.querySelectorAll('.operator');
 
-const divide = (a, b) => {
-    result = a / b;
-    console.log(result);
-}
+    let previousScreen = document.querySelector('.previous');
+    let currentScreen = document.querySelector('.current');
 
-let firstNumber = null;
+    number.forEach((number) => number.addEventListener('click', function(e) {
+        handleNumber(e.target.textContent)
+        currentScreen.textContent = currentValue;
+    }))
 
-let operator = null;
+    operators.forEach((op) => op.addEventListener('click', function(e) {
+        handleOperator(e.target.textContent)
+        previousScreen.textContent = previousValue + '' + operator;
+        currentScreen.textContent = currentValue;
+    }))
 
-let secondNumber = null;
+    clear.addEventListener('click', function() {
+        previousValue = '';
+        currentValue = '';
+        operator = '';
+        previousScreen.textContent = currentValue;
+        currentScreen.textContent = currentValue
+    })
 
-const operate = (a, operator, b) => {
-    switch (operator) {
-        case '+':
-            return add(a, b);
-        case '-':
-            return subtract(a, b);
-        case '*':
-            return multiply(a, b);
-        case '/':
-            return divide(a, b);
-        default:
-            return 'Invalid operator ';
+    equals.addEventListener('click', function() {
+        caclulate();
+        previousScreen.textContent = '';
+        currentScreen.textContent = previousValue;
+    })
+})
+
+function handleNumber(num) {
+    if (currentValue.length <= 5) {
+    currentValue += num;
     }
+}
+
+function handleOperator(op) {
+    operator = op;
+    previousValue = currentValue;
+    currentValue = '';
+}
+
+function caclulate(){
+    previousValue = Number(previousValue);
+    currentValue = Number(currentValue);
+
+    if (operator === '+') {
+        previousValue += currentValue;
+    } else if (operator === '-') {
+        previousValue -= currentValue;
+    } else if (operator === 'x') {
+        previousValue *= currentValue;
+    } else {
+        previousValue /= currentValue;
+    }
+
+    previousValue = roundNumber(previousValue);
+    previousValue = previousValue.toString();
+    currentValue = previousValue.toString();
+
+    console.log(caclulate);
+}
+
+function roundNumber(num) {
+    return Math.round(num * 1000) / 1000;
 }
